@@ -20,12 +20,13 @@ app.use('/', function (req, res) {
   if(date === ""){
     res.sendFile( __dirname + "/index.html");
   }else{
-    if(!isNaN(parseInt(date, 10))){
+    if(isNaN(date)==false){
       result = getDate(date);
     }else if(!isNaN(Date.parse(date))){
       result = getDate(Date.parse(date)/1000);
+    }else{
+      result = {unix: null, natural: null};
     }
     res.send(result);
-    result={};
   }
 }).listen(8080);
